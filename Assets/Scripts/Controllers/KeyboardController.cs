@@ -21,6 +21,8 @@ public class KeyboardController : MonoBehaviour
         bool moveUp = Input.GetKey(KeyCode.W);
         bool moveDown = Input.GetKey(KeyCode.S);
 
+        bool fire = Input.GetKey(KeyCode.Space);
+
         if (Player != null)
         {
 
@@ -31,6 +33,11 @@ public class KeyboardController : MonoBehaviour
                 Vector3 Directional = new Vector3(xPosition, yPosition, 0);
 
                 Player.PlayerMove(Directional);
+            }
+
+            if (fire)
+            {
+                Player.PlayerAttack();
             }
         }
         else
