@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public float WalkSpeed = 3;
     public float WalkCooldown = 0.005f;
     public float AttackCooldown = 0.2f;
+
     [Header("Laser Game Object")]
     public GameObject laser;
 
