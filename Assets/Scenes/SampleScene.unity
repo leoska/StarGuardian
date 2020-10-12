@@ -861,7 +861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpeedWalk: 5
-  backgroundSize: 100
+  backgroundSize: 50
 --- !u!1 &495180150
 GameObject:
   m_ObjectHideFlags: 0
