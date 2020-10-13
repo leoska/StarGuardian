@@ -12,6 +12,10 @@ public class Player : MonoBehaviour
     [Header("Laser Game Object")]
     public GameObject laser;
 
+    [Header("Limits")]
+    public float min_Y;
+    public float max_Y;
+
     private float _walkTime = 0f, _attackTime = 0f;
     private Rigidbody2D _rigidbody2D;
     private Transform _transform;
@@ -50,6 +54,22 @@ public class Player : MonoBehaviour
             {
                 _rigidbody2D.velocity = Directional * WalkSpeed;
             }
+
+            // Check Min and Max Y position
+            Vector3 pos = _transform.position;
+
+            if (pos.y > max_Y)
+            {
+                pos.y = max_Y;
+                _transform.position = pos;
+                _rigidbody2D.velocity = new Vector2(0f, 0f);
+            }
+            else if (pos.y < min_Y)
+            {
+                pos.y = min_Y;
+                _transform.position = pos;
+                _rigidbody2D.velocity = new Vector2(0f, 0f);
+            }
         }
         else
         {
@@ -65,6 +85,8 @@ public class Player : MonoBehaviour
             rotation.z = 1f;
             Instantiate<GameObject>(laser, new Vector3(_transform.position.x + 0.8f, _transform.position.y , 0), rotation);
             _attackTime = AttackCooldown;
+
+            // Play the sound FX of shoot laser PEW PEW!!!
         }
     }
 
