@@ -95,6 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99cbf1718c8e8dd42a4b4dd99368ece3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer_min: 0.5
+  timer_max: 4
+  EnemyLaser: {fileID: 8347620091612260691, guid: d12d605a86af31246a16f20bca63aa77,
+    type: 3}
   speed: 2
   bounx_x: -11
 --- !u!61 &-6882449408950634899
