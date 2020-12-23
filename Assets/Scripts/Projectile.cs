@@ -26,6 +26,7 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);
+            Application.AddScore(10);
         }
     }
 }
