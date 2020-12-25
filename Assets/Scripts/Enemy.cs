@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float timer_min = 0.2f;
-    public float timer_max = 1f;
+    public Vector2 timer_limits = new Vector2 (0.2f, 1f);
     public GameObject EnemyLaser;
     public float speed = 2f;
     public float bounx_x = -11f;
@@ -30,7 +29,7 @@ public class Enemy : MonoBehaviour
         Quaternion rotation = transform.rotation;
         rotation.eulerAngles = new Vector3(0f, 0f, 180f);
         Instantiate<GameObject>(EnemyLaser, new Vector3(transform.position.x - 0.8f, transform.position.y, 0), rotation);
-        float timer = Random.Range(timer_min, timer_max);
+        float timer = Random.Range(timer_limits.x, timer_limits.y);
         Invoke("Shoot", timer);
     }
 }

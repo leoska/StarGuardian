@@ -1033,13 +1033,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetPrefabs:
-  - {fileID: 1436453646641670438, guid: bb3cd2b9ca8f6604fa91f6cca7888075, type: 3}
   - {fileID: 5583095734065445543, guid: d465ab7ce1336e3459055db4c4b47bd0, type: 3}
+  - {fileID: 4654460273470378514, guid: 3c4866555f05e5843b56a68977f78c72, type: 3}
+  - {fileID: 8962458686400138605, guid: b893326ad51c72c46a775ec98e5fa536, type: 3}
+  - {fileID: 7270796790435547139, guid: 2b0829b246ebc5f4ca45b2c62a5beb7f, type: 3}
+  - {fileID: 1436453646641670438, guid: bb3cd2b9ca8f6604fa91f6cca7888075, type: 3}
+  - {fileID: 5459894634283707542, guid: 5d7f1986a2007dd4a8b03fdeb47c4089, type: 3}
+  - {fileID: 378917811733215829, guid: 12d14043b1c19b44db87db938d059cd2, type: 3}
+  - {fileID: 1372465297050919192, guid: 4f8480eb4c5c22e4da29865c5a0a98c0, type: 3}
+  - {fileID: 5541759012244214271, guid: 71a4a2e9aaefa0a4c99ccc3ef12a4fa9, type: 3}
+  - {fileID: 1021131530201088782, guid: ecae98af4ff75c2428f89f460a5e1475, type: 3}
+  - {fileID: 1703964802222346679, guid: b79a3f479bd1ce74b87c06d4ff468f6b, type: 3}
+  - {fileID: 8277009591633402056, guid: c6313c83d058cfd4084528aa6a736c08, type: 3}
+  - {fileID: 4904862809684790534, guid: 572b1896ab593124faa097f2f453aa57, type: 3}
   countLayers: 10
   scaleLimits: {x: 0.1, y: 0.5}
   speedLimits: {x: 0.2, y: 4}
   Y_limits: {x: -4.25, y: 4.25}
-  timerLimits: {x: 2, y: 4}
+  timerLimits: {x: 3, y: 5}
 --- !u!4 &734735479
 Transform:
   m_ObjectHideFlags: 0
@@ -1600,8 +1611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3acd196f1112c4fb19c4fd60a281a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  min_Y: -4.25
-  max_Y: 4.25
+  range_limits: {x: -4.25, y: 4.25}
   timer: 2
   enemyPrefabs:
   - {fileID: 5528616765612585404, guid: bf617d66b2008724c9a06e6a9110698d, type: 3}
@@ -1611,6 +1621,11 @@ MonoBehaviour:
   - {fileID: 7564991043556368202, guid: a8045f2fdf9680241810f773e28982fa, type: 3}
   trashPrefabs:
   - {fileID: 8702840768276476959, guid: 0ec69d17b487b31488a8ec9feeb4e2ec, type: 3}
+  - {fileID: 5732585610680064785, guid: fe128988cb77d5742a6ca26407b4df65, type: 3}
+  - {fileID: 1353315545637014820, guid: 876059fb325c00544942a5cc5d9966b9, type: 3}
+  - {fileID: 8067196985597544642, guid: 12490dc52e6df0841ab1fd334c2bf84e, type: 3}
+  - {fileID: 3651392538330608853, guid: a9a80647453ac9546a99e8ccf60c47a8, type: 3}
+  - {fileID: 3910468496348762639, guid: 98382cf9c0060c147a4f21ef6478f38a, type: 3}
 --- !u!1 &1588804536
 GameObject:
   m_ObjectHideFlags: 0

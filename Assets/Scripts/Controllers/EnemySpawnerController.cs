@@ -5,8 +5,7 @@ using UnityEngine;
 public class EnemySpawnerController : MonoBehaviour
 {
     [Header("Limits")]
-    public float min_Y;
-    public float max_Y;
+    public Vector2 range_limits = new Vector2(-4.25f, 4.25f);
     public float timer = 2f;
 
     [Header("Enemy prefabs")]
@@ -30,7 +29,7 @@ public class EnemySpawnerController : MonoBehaviour
     }
     void SpawnEnemy()
     {
-        float pos_y = Random.Range(min_Y, max_Y);
+        float pos_y = Random.Range(range_limits.x,range_limits.y);
         Vector3 pos = transform.position;
         pos.y = pos_y;
         int EnemyIndex = Random.Range(0, enemyPrefabs.Length);
@@ -40,7 +39,7 @@ public class EnemySpawnerController : MonoBehaviour
 
     void SpawnTrash ()
     {
-        float pos_y = Random.Range(min_Y, max_Y);
+        float pos_y = Random.Range(range_limits.x, range_limits.y);
         Vector3 pos = transform.position;
         pos.y = pos_y;
         int TrashIndex = Random.Range(0, trashPrefabs.Length);

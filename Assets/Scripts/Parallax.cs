@@ -12,7 +12,7 @@ public class Parallax : MonoBehaviour
     public Vector2 scaleLimits = new Vector2(0.1f, 0.5f);
     public Vector2 speedLimits = new Vector2(0.2f, 4f);
     public Vector2 Y_limits = new Vector2(-4.25f, 4.25f);
-    public Vector2 timerLimits= new Vector2 (2f,4f);
+    public Vector2 timerLimits= new Vector2 (1f,3f);
     private List<GameObject>[] _layers; 
 
     // Start is called before the first frame update
