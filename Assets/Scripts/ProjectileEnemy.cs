@@ -23,7 +23,7 @@ public class ProjectileEnemy : MonoBehaviour
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
-            Application.GameOver();
+            App.Instance.GameOver();
         }
     }
 }

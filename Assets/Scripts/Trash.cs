@@ -25,11 +25,12 @@ public class Trash : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // TODO: добавить коллизию для мусора
         if (collision.gameObject.tag == "Player")
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
-            Application.GameOver();
+            App.Instance.GameOver();
         }
     }
 }
