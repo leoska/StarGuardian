@@ -25,5 +25,7 @@ public class ProjectileEnemy : MonoBehaviour
             Destroy(gameObject);
             App.Instance.GameOver();
         }
+        if (collision.gameObject.tag == "Finish")
+            Destroy(gameObject);
     }
 }

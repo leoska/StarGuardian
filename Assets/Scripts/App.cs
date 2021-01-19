@@ -8,6 +8,7 @@ public class App : MonoBehaviour
 {
     public static App Instance { get; private set; }
     public uint score = 0;
+    public float timer = 0;
 
     private GameState _state = GameState.Menu; 
 
@@ -25,6 +26,15 @@ public class App : MonoBehaviour
         {
             Application.Quit();
         }
+
+        timer += 3 * Time.deltaTime;
+        if (timer >1)
+        {
+            score += 1;
+            updateHUD();
+            timer = 0;
+        }
+
 
     }
 

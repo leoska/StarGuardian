@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+  timer: 0
 --- !u!4 &439191849
 Transform:
   m_ObjectHideFlags: 0
@@ -357,6 +358,11 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7287667647257977391, guid: e623e5d426d53a14b86aa6a8128bcb3a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140733978675550614, guid: e623e5d426d53a14b86aa6a8128bcb3a,
         type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -500,7 +506,7 @@ PrefabInstance:
     - target: {fileID: 4506728994242101671, guid: d38f3d87d39efe44db6753ede9d7e967,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4506728994543735641, guid: d38f3d87d39efe44db6753ede9d7e967,
         type: 3}

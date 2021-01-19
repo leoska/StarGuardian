@@ -95,12 +95,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99cbf1718c8e8dd42a4b4dd99368ece3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer_min: 0.2
-  timer_max: 1
+  timer_limits: {x: 0.2, y: 2}
   EnemyLaser: {fileID: 8347620091612260691, guid: d12d605a86af31246a16f20bca63aa77,
     type: 3}
   speed: 2
   bounx_x: -11
+  y_limits: {x: -4.5, y: 4.5}
 --- !u!61 &-1666144875474252739
 BoxCollider2D:
   m_ObjectHideFlags: 0
