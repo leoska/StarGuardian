@@ -18,17 +18,22 @@ public class KeyboardController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Vertical Movement
         bool moveUp = Input.GetKey(KeyCode.W);
         bool moveDown = Input.GetKey(KeyCode.S);
+
+        // Horizontal Movement
+        bool moveLeft = Input.GetKey(KeyCode.A);
+        bool moveRight = Input.GetKey(KeyCode.D);
 
         bool fire = Input.GetKey(KeyCode.Space);
 
         if (Player != null)
         {
 
-            if (moveUp || moveDown)
+            if (moveUp || moveDown || moveLeft || moveRight)
             {
-                float xPosition = 0f;
+                float xPosition = -Convert.ToInt32(moveLeft) + Convert.ToInt32(moveRight);
                 float yPosition = -Convert.ToInt32(moveDown) + Convert.ToInt32(moveUp);
                 Vector3 Directional = new Vector3(xPosition, yPosition, 0);
 

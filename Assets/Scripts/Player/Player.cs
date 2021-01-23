@@ -13,8 +13,8 @@ public class Player : MonoBehaviour
     public GameObject laser;
 
     [Header("Limits")]
-    public float min_Y;
-    public float max_Y;
+    public Vector2 limit_y = new Vector2(-4.25f, 4.25f);
+    public Vector2 limit_x = new Vector2(-7f, 7);
 
     private float _walkTime = 0f, _attackTime = 0f;
     private Rigidbody2D _rigidbody2D;
@@ -55,21 +55,38 @@ public class Player : MonoBehaviour
                 _rigidbody2D.velocity = Directional * WalkSpeed;
             }
 
-            // Check Min and Max Y position
+            // Check Min and Max X and Y position
             Vector3 pos = _transform.position;
+            bool hasChange = false;
 
-            if (pos.y > max_Y)
+            if (pos.y > limit_y.y)
             {
-                pos.y = max_Y;
-                _transform.position = pos;
-                _rigidbody2D.velocity = new Vector2(0f, 0f);
+                pos.y = limit_y.y;
+                hasChange = true;
+                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0f);
             }
-            else if (pos.y < min_Y)
+            else if (pos.y < limit_y.x)
             {
-                pos.y = min_Y;
-                _transform.position = pos;
-                _rigidbody2D.velocity = new Vector2(0f, 0f);
+                pos.y = limit_y.x;
+                hasChange = true;
+                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0f);
             }
+
+            if (pos.x > limit_x.y)
+            {
+                pos.x = limit_x.y;
+                hasChange = true;
+                _rigidbody2D.velocity = new Vector2(0f, _rigidbody2D.velocity.y);
+            }
+            else if (pos.x < limit_x.x)
+            {
+                pos.x = limit_x.x;
+                hasChange = true;
+                _rigidbody2D.velocity = new Vector2(0f, _rigidbody2D.velocity.y);
+            }
+
+            if (hasChange)
+                _transform.position = pos;
         }
         else
         {

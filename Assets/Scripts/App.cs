@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System;
 
 public class App : MonoBehaviour
@@ -24,7 +25,11 @@ public class App : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            Application.Quit();
+            // TODO: Карен попросил возвращаться в главное меню
+            if (SceneManager.GetActiveScene().name == "MainMenu")
+                Application.Quit();
+            else
+                ReturnToMainMenu();
         }
 
         timer += 3 * Time.deltaTime;
@@ -38,12 +43,19 @@ public class App : MonoBehaviour
 
     }
 
+    private void ReturnToMainMenu()
+    {
+        score = 0;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void GameOver()
     {
         Time.timeScale = 0f;
     }
     
-    public void AddScore (uint incScore)
+    public void AddScore(uint incScore)
     {
         score += incScore;
         updateHUD();
