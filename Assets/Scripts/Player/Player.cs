@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,11 @@ public class Player : MonoBehaviour
 
     [Header("Laser Game Object")]
     public GameObject laser;
+
+    [Header("Shield")]
+    public GameObject Shield;
+    private float _shieldTime = 0f;
+    private float _shieldCooldawn = 10f;
 
     [Header("Limits")]
     public Vector2 limit_y = new Vector2(-4.25f, 4.25f);
@@ -41,6 +47,9 @@ public class Player : MonoBehaviour
             _rigidbody2D.velocity = new Vector2(0f, 0f);
             _walkTime = 0;
         }
+
+        if (_shieldTime > 0)
+            _shieldTime -= Time.deltaTime;
     }
 
     public void PlayerMove(Vector3 Directional)
@@ -115,4 +124,14 @@ public class Player : MonoBehaviour
     {
 
     }
+
+    public void PlayerShield ()
+    {
+        if (_shieldTime <=0)
+        {
+            Shield.SetActive(!Shield.activeSelf);
+            _shieldTime = _shieldCooldawn;
+        }
+    }
+
 }

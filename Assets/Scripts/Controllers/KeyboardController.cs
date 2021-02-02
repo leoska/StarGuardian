@@ -28,6 +28,8 @@ public class KeyboardController : MonoBehaviour
 
         bool fire = Input.GetKey(KeyCode.Space);
 
+        bool shield = Input.GetKey(KeyCode.Z);
+
         if (Player != null)
         {
 
@@ -43,6 +45,11 @@ public class KeyboardController : MonoBehaviour
             if (fire)
             {
                 Player.PlayerAttack();
+            }
+
+            if (shield)
+            {
+                Player.PlayerShield();
             }
         }
         else
