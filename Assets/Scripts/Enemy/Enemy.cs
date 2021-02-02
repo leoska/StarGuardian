@@ -9,7 +9,10 @@ public class Enemy : MonoBehaviour
     public float speed = 2f;
     public float bounx_x = -11f;
     public Vector2 y_limits = new Vector2(-4.5f, 4.5f);
+
     private VerticalDirection _dir;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +50,7 @@ public class Enemy : MonoBehaviour
         float timer = Random.Range(timer_limits.x, timer_limits.y);
         Invoke("Shoot", timer);
     }
+
 
     public enum VerticalDirection
     {
