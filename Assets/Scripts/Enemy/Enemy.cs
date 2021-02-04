@@ -51,6 +51,15 @@ public class Enemy : MonoBehaviour
         Invoke("Shoot", timer);
     }
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+            App.Instance.GameOver();
+        }
+    }
 
     public enum VerticalDirection
     {

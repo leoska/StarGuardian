@@ -11,7 +11,7 @@ public class App : MonoBehaviour
     public uint score = 0;
     public float timer = 0;
 
-    private GameState _state = GameState.Menu; 
+    private GameState _state = GameState.Menu;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +40,7 @@ public class App : MonoBehaviour
             timer = 0;
         }
 
+            
 
     }
 
