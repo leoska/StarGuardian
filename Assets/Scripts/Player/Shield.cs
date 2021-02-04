@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
+    public Player Player;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,8 @@ public class Shield : MonoBehaviour
         if (collision.gameObject.tag == "EnemyLaser")
         {
             Destroy(collision.gameObject);
-            Destroy(gameObject);
+            gameObject.SetActive(!gameObject.activeSelf);
+            Player.ShieldCooldawn();
         }
 
     }

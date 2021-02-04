@@ -127,11 +127,15 @@ public class Player : MonoBehaviour
 
     public void PlayerShield ()
     {
-        if (_shieldTime <=0)
+        if (_shieldTime <=0 && !Shield.activeSelf)
         {
             Shield.SetActive(!Shield.activeSelf);
-            _shieldTime = _shieldCooldawn;
         }
+    }
+
+    public void ShieldCooldawn ()
+    {
+        _shieldTime = _shieldCooldawn;
     }
 
 }
