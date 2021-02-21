@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public float WalkSpeed = 3;
     public float WalkCooldown = 0.005f;
     public float AttackCooldown = 0.2f;
+    public float ScaleAnimationSpeed = 0.5f;
 
     [Header("Laser Game Object")]
     public GameObject laser;
@@ -27,15 +28,22 @@ public class Player : MonoBehaviour
     public Vector2 limit_y = new Vector2(-4.25f, 4.25f);
     public Vector2 limit_x = new Vector2(-7f, 7);
 
-    private float _walkTime = 0f, _attackTime = 0f;
+    public float dodgeCooldown = 7f;
+    public float maxDodgeDuration = 5f;
+
+    private float _walkTime = 0f, _attackTime = 0f, _dodgeTime = 0f, _dodgeTimer = 0f;
+    private Vector2 _scaleDodgeLimits = new Vector2(1f, 1.5f);
+    private dodgeScaleStatus scaleStatus;
     private Rigidbody2D _rigidbody2D;
     private Transform _transform;
+    private BoxCollider2D _boxCollider2d;
 
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _transform = GetComponent<Transform>();
+        _boxCollider2d = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -53,11 +61,42 @@ public class Player : MonoBehaviour
             _walkTime = 0;
         }
 
+
+        // TODO: отрефакторить по методам проверки
         if (_shieldTime > 0)
             _shieldTime -= Time.deltaTime;
 
         if (_rocketTime > 0)
             _rocketTime -= Time.deltaTime;
+
+        if (_dodgeTime > 0)
+            _dodgeTime -= Time.deltaTime;
+
+        if (_dodgeTimer > 0)
+        {
+            _dodgeTimer -= Time.deltaTime;
+
+            if (scaleStatus == dodgeScaleStatus.Increase)
+            {
+                transform.localScale = new Vector3(transform.localScale.x + ScaleAnimationSpeed * Time.deltaTime, transform.localScale.y + ScaleAnimationSpeed * Time.deltaTime, 0f);
+            }
+            else
+            {
+                transform.localScale = new Vector3(transform.localScale.x - ScaleAnimationSpeed * Time.deltaTime, transform.localScale.y - ScaleAnimationSpeed * Time.deltaTime, 0f);
+            }
+
+            if (transform.localScale.x <= _scaleDodgeLimits.x)
+                scaleStatus = dodgeScaleStatus.Increase;
+            if (transform.localScale.x >= _scaleDodgeLimits.y)
+                scaleStatus = dodgeScaleStatus.Decrease;
+
+            if (_dodgeTimer <= 0f)
+            {
+                PlayerFinishDodge();
+                _dodgeTimer = 0f;
+            }
+        }
+           
     }
 
     public void PlayerMove(Vector3 Directional)
@@ -151,9 +190,31 @@ public class Player : MonoBehaviour
         if (_rocketTime<=0)
         {
             Quaternion rotation = _transform.rotation;
-            Instantiate<GameObject>(rocket, new Vector3(_transform.position.x + 0.8f, _transform.position.y, 0), rotation);
+            Instantiate<GameObject>(rocket, new Vector3(_transform.position.x + 0.8f, _transform.position.y, 1f), rotation);
             _rocketTime = RocketCooldown;
         }
     }
 
+    public void PlayerDodge()
+    {
+        if (_dodgeTime<=0)
+        {
+            _boxCollider2d.enabled = false;
+            _dodgeTime = dodgeCooldown;
+            _dodgeTimer = maxDodgeDuration;
+            scaleStatus = dodgeScaleStatus.Increase;
+        }
+    }
+
+    private void PlayerFinishDodge()
+    {
+        _boxCollider2d.enabled = true;
+        transform.localScale = new Vector3(1f, 1f, 1f);
+    }
+
+    enum dodgeScaleStatus
+    {
+        Increase = 0,
+        Decrease = 1
+    }
 }

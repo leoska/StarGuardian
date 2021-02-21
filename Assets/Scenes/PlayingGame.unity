@@ -495,12 +495,15 @@ MonoBehaviour:
   WalkSpeed: 6
   WalkCooldown: 0.005
   AttackCooldown: 0.15
+  ScaleAnimationSpeed: 0.7
   laser: {fileID: 2673626316333941631, guid: 20f6c6a9a44d26a48a091ccf23e285ff, type: 3}
   rocket: {fileID: 8524706511971625469, guid: e892286a24f144b9799e21c5e2988814, type: 3}
   RocketCooldown: 5
   Shield: {fileID: 1766827793}
   limit_y: {x: -4.25, y: 4.25}
   limit_x: {x: -7, y: 7}
+  dodgeCooldown: 7
+  maxDodgeDuration: 5
 --- !u!61 &193271485
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1411,7 +1414,7 @@ GameObject:
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1505407357
 Transform:
   m_ObjectHideFlags: 0
@@ -1827,7 +1830,7 @@ PrefabInstance:
     - target: {fileID: 5528616765612585404, guid: bf617d66b2008724c9a06e6a9110698d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3843365730954030147, guid: bf617d66b2008724c9a06e6a9110698d, type: 3}

@@ -32,6 +32,7 @@ public class KeyboardController : MonoBehaviour
 
         bool rocket = Input.GetKey(KeyCode.X);
 
+        bool dodge = Input.GetKey(KeyCode.C);
         if (Player != null)
         {
 
@@ -57,6 +58,11 @@ public class KeyboardController : MonoBehaviour
             if (rocket)
             {
                 Player.PlayerRocket();
+            }
+
+            if (dodge)
+            {
+                Player.PlayerDodge();
             }
         }
         else
