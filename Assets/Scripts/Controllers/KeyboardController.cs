@@ -30,6 +30,8 @@ public class KeyboardController : MonoBehaviour
 
         bool shield = Input.GetKey(KeyCode.Z);
 
+        bool rocket = Input.GetKey(KeyCode.X);
+
         if (Player != null)
         {
 
@@ -50,6 +52,11 @@ public class KeyboardController : MonoBehaviour
             if (shield)
             {
                 Player.PlayerShield();
+            }
+
+            if (rocket)
+            {
+                Player.PlayerRocket();
             }
         }
         else

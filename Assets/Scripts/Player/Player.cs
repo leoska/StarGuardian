@@ -13,6 +13,11 @@ public class Player : MonoBehaviour
     [Header("Laser Game Object")]
     public GameObject laser;
 
+    [Header("Rocket")]
+    public GameObject rocket;
+    public float RocketCooldown = 5f;
+    private float _rocketTime = 0f;
+
     [Header("Shield")]
     public GameObject Shield;
     private float _shieldTime = 0f;
@@ -50,6 +55,9 @@ public class Player : MonoBehaviour
 
         if (_shieldTime > 0)
             _shieldTime -= Time.deltaTime;
+
+        if (_rocketTime > 0)
+            _rocketTime -= Time.deltaTime;
     }
 
     public void PlayerMove(Vector3 Directional)
@@ -136,6 +144,16 @@ public class Player : MonoBehaviour
     public void ShieldCooldawn ()
     {
         _shieldTime = _shieldCooldawn;
+    }
+
+    public void PlayerRocket ()
+    {
+        if (_rocketTime<=0)
+        {
+            Quaternion rotation = _transform.rotation;
+            Instantiate<GameObject>(rocket, new Vector3(_transform.position.x + 0.8f, _transform.position.y, 0), rotation);
+            _rocketTime = RocketCooldown;
+        }
     }
 
 }
