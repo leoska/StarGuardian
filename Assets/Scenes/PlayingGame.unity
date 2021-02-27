@@ -385,6 +385,7 @@ GameObject:
   - component: {fileID: 193271484}
   - component: {fileID: 193271481}
   - component: {fileID: 193271485}
+  - component: {fileID: 193271486}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -530,6 +531,60 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.35, y: 1.2}
   m_EdgeRadius: 0
+--- !u!60 &193271486
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193271480}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.68, y: 1.68}
+    newSize: {x: 1.68, y: 1.68}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.5, y: -0.35999998}
+      - {x: 0.79999995, y: -0.19999999}
+      - {x: 0.84, y: -0.13}
+      - {x: 0.84, y: 0}
+      - {x: 0.59999996, y: 0.24}
+      - {x: 0.24, y: 0.42}
+      - {x: -0.02, y: 0.53}
+      - {x: -0.14, y: 0.64}
+      - {x: -0.21, y: 0.69}
+      - {x: -0.42, y: 0.76}
+      - {x: -0.52, y: 0.77}
+      - {x: -0.65, y: 0.77}
+      - {x: -0.71999997, y: 0.75}
+      - {x: -0.59999996, y: 0.39}
+      - {x: -0.55, y: -0.01}
+      - {x: -0.62, y: -0.04}
+      - {x: -0.7, y: -0.099999994}
+      - {x: -0.81, y: -0.21}
+      - {x: -0.82, y: -0.22999999}
+      - {x: -0.82, y: -0.26999998}
+      - {x: -0.71, y: -0.31}
+      - {x: -0.52, y: -0.37}
+      - {x: -0.65999997, y: -0.53999996}
+      - {x: -0.72999996, y: -0.72999996}
+      - {x: -0.65, y: -0.74}
+      - {x: -0.35, y: -0.74}
+      - {x: -0.06, y: -0.59999996}
+      - {x: 0.01, y: -0.47}
+      - {x: 0.21, y: -0.44}
 --- !u!1 &247523326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1414,7 +1469,7 @@ GameObject:
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1505407357
 Transform:
   m_ObjectHideFlags: 0
@@ -1830,7 +1885,7 @@ PrefabInstance:
     - target: {fileID: 5528616765612585404, guid: bf617d66b2008724c9a06e6a9110698d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3843365730954030147, guid: bf617d66b2008724c9a06e6a9110698d, type: 3}
