@@ -105,8 +105,6 @@ public class EnemySmartMove : MonoBehaviour
             float previousYTop = y1;
             float previousYBottom = y2;
 
-            Debug.Log("DetectionLaser!!!");
-
             for (uint i = 0; i < countTry; ++i)
             {
                 // Top Detection Area
@@ -180,6 +178,9 @@ public class EnemySmartMove : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!Application.isPlaying)
+            return;
+
         // Draw Detection Areas
         DrawGizmosArea(_areaForward, Color.yellow);
 

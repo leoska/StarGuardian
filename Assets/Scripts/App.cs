@@ -1,24 +1,41 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
-public class App : MonoBehaviour
+// SingleTon класс всего приложения
+public class App
 {
-    public static App Instance { get; private set; }
+    #region public values
+    public static App Instance 
+    {
+        get => _app != null ? _app : new App();
+        private set => _app = value; 
+    }
     public uint score = 0;
     public float timer = 0;
 
-    [Header("Limits")]
+    [Header("GameState")]
     public GameState _state = GameState.Menu;
+    #endregion
 
-    // Start is called before the first frame update
-    void Start()
+    #region private values
+    private static App _app = null;
+    private KeyboardController _keyboardController;
+    private EventLoop _eventLoop;
+    #endregion
+
+    // Constructor
+    public App()
     {
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        _app = this;
+        _keyboardController = new KeyboardController();
+        _eventLoop = new EventLoop();
+    }
+
+    public void EventUpdate()
+    {
+        _keyboardController.UpdateKeyboard();
     }
 
     // Update is called once per frame
@@ -40,9 +57,6 @@ public class App : MonoBehaviour
             updateHUD();
             timer = 0;
         }
-
-            
-
     }
 
     private void ReturnToMainMenu()

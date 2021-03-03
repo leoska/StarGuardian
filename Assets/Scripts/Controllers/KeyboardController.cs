@@ -1,22 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System;
+﻿using System;
 using UnityEngine;
 
-public class KeyboardController : MonoBehaviour
+public class KeyboardController
 {
 
     public Player Player;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Player = Player == null ? GetComponent<Player>() : Player;
-    }
-
-    // Update is called once per frame
-    void Update()
+    // UpdateKeyboard
+    public void UpdateKeyboard()
     {
         // Vertical Movement
         bool moveUp = Input.GetKey(KeyCode.W);
