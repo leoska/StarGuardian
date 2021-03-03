@@ -30,7 +30,7 @@ public class Trash : MonoBehaviour
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
-            App.Instance.GameOver();
+            App.Instance.gameController.GameOver();
         }
     }
 }

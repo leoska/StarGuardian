@@ -12,7 +12,6 @@ public class Enemy : MonoBehaviour
 
     private VerticalDirection _dir;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +56,7 @@ public class Enemy : MonoBehaviour
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
-            App.Instance.GameOver();
+            App.Instance.gameController.GameOver();
         }
     }
 

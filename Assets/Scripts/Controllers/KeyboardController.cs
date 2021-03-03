@@ -58,7 +58,7 @@ public class KeyboardController
         }
         else
         {
-            Player = FindObjectOfType<Player>();
+            // Player = FindObjectOfType<Player>();
         }
     }
 

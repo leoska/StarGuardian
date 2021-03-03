@@ -19,6 +19,6 @@ public class PlayButton : MonoBehaviour
 
     private void OnMouseDown()
     {
-        SceneManager.LoadScene("PlayingGame");
+        App.Instance.gameController.SwitchGameState(GameController.GameState.Game);
     }
 }
