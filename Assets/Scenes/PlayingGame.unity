@@ -1156,6 +1156,7 @@ MonoBehaviour:
   score: 0
   mainMenu: {fileID: 698976105}
   playingGame: {fileID: 948836513}
+  player: {fileID: 193271480}
 --- !u!1 &899033328
 GameObject:
   m_ObjectHideFlags: 0

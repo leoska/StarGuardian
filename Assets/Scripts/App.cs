@@ -10,15 +10,12 @@ public class App
         private set => _app = value; 
     }
 
-    public GameController gameController
-    {
-        get => _gameController;
-    }
+    public GameController gameController => _gameController;
+
     #endregion
 
     #region private values
     private static App _app = null;
-    private KeyboardController _keyboardController;
     private GameController _gameController;
     #endregion
 
@@ -26,16 +23,15 @@ public class App
     private App()
     {
         _app = this;
-        _keyboardController = new KeyboardController();
     }
 
-    public void Initialize(GameController gameController)
+    public void Initialize(GameController controller)
     {
-        _gameController = gameController;
+        _gameController = controller;
+        Debug.Log(_gameController);
     }
 
     public void EventUpdate()
     {
-        _keyboardController.UpdateKeyboard();
     }
 }

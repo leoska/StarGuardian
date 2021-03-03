@@ -1,26 +1,30 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
     [Header("Speeds")]
-    public float WalkSpeed = 3;
-    public float WalkCooldown = 0.005f;
-    public float AttackCooldown = 0.2f;
-    public float ScaleAnimationSpeed = 0.5f;
+    [FormerlySerializedAs("WalkSpeed")] 
+    public float walkSpeed = 3;
+    [FormerlySerializedAs("WalkCooldown")] 
+    public float walkCooldown = 0.005f;
+    [FormerlySerializedAs("AttackCooldown")] 
+    public float attackCooldown = 0.2f;
+    [FormerlySerializedAs("ScaleAnimationSpeed")] 
+    public float scaleAnimationSpeed = 0.5f;
 
     [Header("Laser Game Object")]
     public GameObject laser;
 
     [Header("Rocket")]
     public GameObject rocket;
-    public float RocketCooldown = 5f;
+    [FormerlySerializedAs("RocketCooldown")] 
+    public float rocketCooldown = 5f;
     private float _rocketTime = 0f;
 
-    [Header("Shield")]
-    public GameObject Shield;
+    [FormerlySerializedAs("Shield")] [Header("Shield")]
+    public GameObject shield;
     private float _shieldTime = 0f;
     private float _shieldCooldawn = 10f;
 
@@ -33,13 +37,13 @@ public class Player : MonoBehaviour
 
     private float _walkTime = 0f, _attackTime = 0f, _dodgeTime = 0f, _dodgeTimer = 0f;
     private Vector2 _scaleDodgeLimits = new Vector2(1f, 1.5f);
-    private dodgeScaleStatus scaleStatus;
+    private DodgeScaleStatus _scaleStatus;
     private Rigidbody2D _rigidbody2D;
     private Transform _transform;
     private BoxCollider2D _boxCollider2d;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _transform = GetComponent<Transform>();
@@ -47,7 +51,7 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (_walkTime > 0)
             _walkTime -= Time.deltaTime;
@@ -76,19 +80,19 @@ public class Player : MonoBehaviour
         {
             _dodgeTimer -= Time.deltaTime;
 
-            if (scaleStatus == dodgeScaleStatus.Increase)
+            if (_scaleStatus == DodgeScaleStatus.Increase)
             {
-                transform.localScale = new Vector3(transform.localScale.x + ScaleAnimationSpeed * Time.deltaTime, transform.localScale.y + ScaleAnimationSpeed * Time.deltaTime, 0f);
+                transform.localScale = new Vector3(transform.localScale.x + scaleAnimationSpeed * Time.deltaTime, transform.localScale.y + scaleAnimationSpeed * Time.deltaTime, 0f);
             }
             else
             {
-                transform.localScale = new Vector3(transform.localScale.x - ScaleAnimationSpeed * Time.deltaTime, transform.localScale.y - ScaleAnimationSpeed * Time.deltaTime, 0f);
+                transform.localScale = new Vector3(transform.localScale.x - scaleAnimationSpeed * Time.deltaTime, transform.localScale.y - scaleAnimationSpeed * Time.deltaTime, 0f);
             }
 
             if (transform.localScale.x <= _scaleDodgeLimits.x)
-                scaleStatus = dodgeScaleStatus.Increase;
+                _scaleStatus = DodgeScaleStatus.Increase;
             if (transform.localScale.x >= _scaleDodgeLimits.y)
-                scaleStatus = dodgeScaleStatus.Decrease;
+                _scaleStatus = DodgeScaleStatus.Decrease;
 
             if (_dodgeTimer <= 0f)
             {
@@ -96,19 +100,70 @@ public class Player : MonoBehaviour
                 _dodgeTimer = 0f;
             }
         }
-           
+
+        UpdateKeyboard();
     }
-
-    public void PlayerMove(Vector3 Directional)
+    
+    // TODO: требует рефакторинга!!!
+    private void UpdateKeyboard()
     {
-        if (Directional.magnitude > 0)
-        {
-            Directional.Normalize();
-            _walkTime = WalkCooldown;
+        // Vertical Movement
+        var moveUp = Input.GetKey(KeyCode.W);
+        var moveDown = Input.GetKey(KeyCode.S);
 
-            if (Directional.magnitude != 0)
+        // Horizontal Movement
+        var moveLeft = Input.GetKey(KeyCode.A);
+        var moveRight = Input.GetKey(KeyCode.D);
+
+        var fire = Input.GetKey(KeyCode.Space);
+
+        var shield = Input.GetKey(KeyCode.Z);
+
+        var rocketShell = Input.GetKey(KeyCode.X);
+
+        var dodge = Input.GetKey(KeyCode.C);
+
+        if (moveUp || moveDown || moveLeft || moveRight)
+        {
+            float xPosition = -Convert.ToInt32(moveLeft) + Convert.ToInt32(moveRight);
+            float yPosition = -Convert.ToInt32(moveDown) + Convert.ToInt32(moveUp);
+            var directional = new Vector3(xPosition, yPosition, 0);
+
+            PlayerMove(directional);
+        }
+
+        if (fire)
+        {
+            PlayerAttack();
+        }
+
+        if (shield)
+        {
+            PlayerShield();
+        }
+
+        if (rocketShell)
+        {
+            PlayerRocket();
+        }
+
+        if (dodge)
+        {
+            PlayerDodge();
+        }
+    }
+    
+    // TODO: Отрефакторить. Не имеет смысла вообще использовать velocity -> лучше Vector3.Translate от transform.position
+    private void PlayerMove(Vector3 directional)
+    {
+        if (directional.magnitude > 0)
+        {
+            directional.Normalize();
+            _walkTime = walkCooldown;
+
+            if (directional.magnitude != 0)
             {
-                _rigidbody2D.velocity = Directional * WalkSpeed;
+                _rigidbody2D.velocity = directional * walkSpeed;
             }
 
             // Check Min and Max X and Y position
@@ -156,7 +211,7 @@ public class Player : MonoBehaviour
         {
             Quaternion rotation = _transform.rotation;
             Instantiate<GameObject>(laser, new Vector3(_transform.position.x + 0.8f, _transform.position.y , 0), rotation);
-            _attackTime = AttackCooldown;
+            _attackTime = attackCooldown;
 
             // Play the sound FX of shoot laser PEW PEW!!!
         }
@@ -172,11 +227,11 @@ public class Player : MonoBehaviour
 
     }
 
-    public void PlayerShield ()
+    private void PlayerShield ()
     {
-        if (_shieldTime <=0 && !Shield.activeSelf)
+        if (_shieldTime <=0 && !shield.activeSelf)
         {
-            Shield.SetActive(!Shield.activeSelf);
+            shield.SetActive(!shield.activeSelf);
         }
     }
 
@@ -185,24 +240,24 @@ public class Player : MonoBehaviour
         _shieldTime = _shieldCooldawn;
     }
 
-    public void PlayerRocket ()
+    private void PlayerRocket ()
     {
         if (_rocketTime<=0)
         {
             Quaternion rotation = _transform.rotation;
             Instantiate<GameObject>(rocket, new Vector3(_transform.position.x + 0.8f, _transform.position.y, 1f), rotation);
-            _rocketTime = RocketCooldown;
+            _rocketTime = rocketCooldown;
         }
     }
 
-    public void PlayerDodge()
+    private void PlayerDodge()
     {
         if (_dodgeTime<=0)
         {
             _boxCollider2d.enabled = false;
             _dodgeTime = dodgeCooldown;
             _dodgeTimer = maxDodgeDuration;
-            scaleStatus = dodgeScaleStatus.Increase;
+            _scaleStatus = DodgeScaleStatus.Increase;
         }
     }
 
@@ -212,7 +267,7 @@ public class Player : MonoBehaviour
         transform.localScale = new Vector3(1f, 1f, 1f);
     }
 
-    enum dodgeScaleStatus
+    enum DodgeScaleStatus
     {
         Increase = 0,
         Decrease = 1

@@ -14,6 +14,9 @@ public class GameController : MonoBehaviour
     public GameObject mainMenu;
     public GameObject playingGame;
 
+    [Header("Player")] 
+    public GameObject player;
+
     private GameState _state = GameState.Menu;
     private float timer = 0f;
 
