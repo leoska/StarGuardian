@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Rendering;
 
 public class Parallax : MonoBehaviour
 {
     [Header("Planet prefabs")]
     public GameObject[] planetPrefabs;
-
 
     public uint countLayers = 15;
     public Vector2 scaleLimits = new Vector2(0.1f, 0.5f);
@@ -20,7 +20,7 @@ public class Parallax : MonoBehaviour
     private List<uint> _usedPlanet;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _usedPlanet = new List<uint>();
         float timer = Random.Range(timerLimits.x, timerLimits.y);
@@ -29,25 +29,25 @@ public class Parallax : MonoBehaviour
         {
             _layers[i] = new List<GameObject>();
         }
-        Invoke("createRandomPlanet", timer);
+        Invoke(nameof(CreateRandomPlanet), timer);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
 
     private uint GetRandomPlanetIndex ()
     {
-        List<uint> availablePlanets = new List<uint>();
+        var availablePlanets = new List<uint>();
         for (uint i=0; i<planetPrefabs.Length; ++i)
         {
             if (!_usedPlanet.Contains(i))
                 availablePlanets.Add(i);
         }
-        int Index = Random.Range(0, availablePlanets.Count);
-        uint PlanetIndex = availablePlanets[Index];
+        var Index = Random.Range(0, availablePlanets.Count);
+        var PlanetIndex = availablePlanets[Index];
         return PlanetIndex;
     }
 
@@ -58,24 +58,26 @@ public class Parallax : MonoBehaviour
         _usedPlanet.Add(value);
     }
 
-    private void createRandomPlanet()
+    private void CreateRandomPlanet()
     {
-        int layer = Random.Range(0, _layers.Length);
-        float timer = Random.Range(timerLimits.x, timerLimits.y);
-        uint PlanetIndex = GetRandomPlanetIndex();
+        var layer = Random.Range(0, _layers.Length);
+        var timer = Random.Range(timerLimits.x, timerLimits.y);
+        var PlanetIndex = GetRandomPlanetIndex();
         PushIndexToUsedPlanet(PlanetIndex);
-        float pos_y = Random.Range(Y_limits.x, Y_limits.y);
-        Vector3 pos = transform.position;
+        var pos_y = Random.Range(Y_limits.x, Y_limits.y);
+        var pos = transform.position;
         pos.y = pos_y;
-        float koef = (scaleLimits.y - scaleLimits.x) / countLayers;
-        float scale = scaleLimits.y - koef * layer;
-        GameObject planet = Instantiate<GameObject>(planetPrefabs[PlanetIndex], pos, Quaternion.Euler(0f, 0f, 0f));
-        float koef_speed = (speedLimits.y - speedLimits.x) / countLayers;
-        float speed = speedLimits.y - koef_speed * layer;
+        var koef = (scaleLimits.y - scaleLimits.x) / countLayers;
+        var scale = scaleLimits.y - koef * layer;
+        var planet = Instantiate<GameObject>(planetPrefabs[PlanetIndex], pos, Quaternion.Euler(0f, 0f, 0f));
+        var koef_speed = (speedLimits.y - speedLimits.x) / countLayers;
+        var speed = speedLimits.y - koef_speed * layer;
         planet.GetComponent<Planet>().speed = speed;
-        planet.GetComponent<SpriteRenderer>().sortingOrder = -10 - layer;
+        
+        // TOOD: переделать сортинг лейер
+        // planet.GetComponent<SortingGroup>().sortingOrder = -10 - layer;
         planet.transform.localScale = new Vector3(scale, scale, 1);
 
-        Invoke("createRandomPlanet", timer);
+        Invoke(nameof(CreateRandomPlanet), timer);
     }
 }

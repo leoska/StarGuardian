@@ -5,7 +5,8 @@ using UnityEngine;
 public class Planet : MonoBehaviour
 {
     public float speed;
-    public float bounx_x = -11f;
+    public float boundX = -11f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,7 @@ public class Planet : MonoBehaviour
         pos.x -= speed * Time.deltaTime;
 
         transform.position = pos;
-        if (pos.x < bounx_x)
+        if (pos.x < boundX)
             Destroy(gameObject);
     }
 }

@@ -473,7 +473,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 193271480}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.305179, y: -0.21499673, z: 7.4155135}
+  m_LocalPosition: {x: -7.88, y: -0.21499673, z: 7.4155135}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7277114555982913666}
@@ -493,14 +493,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6299c331710070648a656cb56e36294e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WalkSpeed: 6
-  WalkCooldown: 0.005
-  AttackCooldown: 0.15
-  ScaleAnimationSpeed: 0.7
+  walkSpeed: 6
+  walkCooldown: 0.005
+  attackCooldown: 0.15
+  scaleAnimationSpeed: 0.7
   laser: {fileID: 2673626316333941631, guid: 20f6c6a9a44d26a48a091ccf23e285ff, type: 3}
   rocket: {fileID: 8524706511971625469, guid: e892286a24f144b9799e21c5e2988814, type: 3}
-  RocketCooldown: 5
-  Shield: {fileID: 1766827793}
+  rocketCooldown: 5
+  shield: {fileID: 1766827793}
   limit_y: {x: -4.25, y: 4.25}
   limit_x: {x: -7, y: 7}
   dodgeCooldown: 7
@@ -957,7 +957,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &698976106
 Transform:
   m_ObjectHideFlags: 0
@@ -1005,19 +1005,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetPrefabs:
-  - {fileID: 5583095734065445543, guid: d465ab7ce1336e3459055db4c4b47bd0, type: 3}
-  - {fileID: 4654460273470378514, guid: 3c4866555f05e5843b56a68977f78c72, type: 3}
-  - {fileID: 8962458686400138605, guid: b893326ad51c72c46a775ec98e5fa536, type: 3}
-  - {fileID: 7270796790435547139, guid: 2b0829b246ebc5f4ca45b2c62a5beb7f, type: 3}
-  - {fileID: 1436453646641670438, guid: bb3cd2b9ca8f6604fa91f6cca7888075, type: 3}
-  - {fileID: 5459894634283707542, guid: 5d7f1986a2007dd4a8b03fdeb47c4089, type: 3}
-  - {fileID: 378917811733215829, guid: 12d14043b1c19b44db87db938d059cd2, type: 3}
-  - {fileID: 1372465297050919192, guid: 4f8480eb4c5c22e4da29865c5a0a98c0, type: 3}
-  - {fileID: 5541759012244214271, guid: 71a4a2e9aaefa0a4c99ccc3ef12a4fa9, type: 3}
-  - {fileID: 1021131530201088782, guid: ecae98af4ff75c2428f89f460a5e1475, type: 3}
-  - {fileID: 1703964802222346679, guid: b79a3f479bd1ce74b87c06d4ff468f6b, type: 3}
-  - {fileID: 8277009591633402056, guid: c6313c83d058cfd4084528aa6a736c08, type: 3}
-  - {fileID: 4904862809684790534, guid: 572b1896ab593124faa097f2f453aa57, type: 3}
+  - {fileID: 3268448745047837999, guid: f50b7922892edd94ab359d73230f7dcb, type: 3}
+  - {fileID: 207933549188451306, guid: a5b58c5fe3652754a8fd4bd7d2c73a85, type: 3}
+  - {fileID: 3028526295901418683, guid: 240874819ea5e704b87a8de2dd82a83f, type: 3}
+  - {fileID: 7081137661174183093, guid: 6920748db556aa34080f228513580ccc, type: 3}
+  - {fileID: 2945337500863568081, guid: c99f5db3134580343836de507793cd1b, type: 3}
+  - {fileID: 2163472499893776743, guid: 3021feda8dfd40949a4caf7c4b790600, type: 3}
+  - {fileID: 2204366967179714999, guid: c75dba41e9e5bfc45bd7b18a12ac5d2a, type: 3}
+  - {fileID: 3930633746853262995, guid: 13e077f1cef6a6a4a80db6c8f2091e73, type: 3}
+  - {fileID: 898915211347838682, guid: 2dc3b863165de5148839e09f93a47f57, type: 3}
+  - {fileID: 7562194864859612961, guid: e3951bd10d778b64e94f94e81803c527, type: 3}
+  - {fileID: 5714963349417979736, guid: 14341f00a2e1d324eb93f28e0673ef30, type: 3}
+  - {fileID: 4377281877947980533, guid: 8d48307b9d83b1c48a94182aa1bd0603, type: 3}
+  - {fileID: 6660778156519410126, guid: 6c33981325b36e14b9bdbd038e3f0748, type: 3}
   countLayers: 15
   scaleLimits: {x: 0.1, y: 0.5}
   speedLimits: {x: 0.4, y: 4}
@@ -1152,7 +1152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4074e21858594d40805a760cc2f5092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGameState: 0
+  startGameState: 1
   score: 0
   mainMenu: {fileID: 698976105}
   playingGame: {fileID: 948836513}
@@ -1411,7 +1411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &948836514
 Transform:
   m_ObjectHideFlags: 0
