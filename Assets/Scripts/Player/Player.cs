@@ -10,7 +10,8 @@ public class Player : MonoBehaviour
     [FormerlySerializedAs("WalkCooldown")] 
     public float walkCooldown = 0.005f;
     [FormerlySerializedAs("AttackCooldown")] 
-    public float attackCooldown = 0.2f;
+    public float attackCooldown = 0.5f;
+    private float _overheating;
     [FormerlySerializedAs("ScaleAnimationSpeed")] 
     public float scaleAnimationSpeed = 0.5f;
 
@@ -58,6 +59,13 @@ public class Player : MonoBehaviour
 
         if (_attackTime > 0)
             _attackTime -= Time.deltaTime;
+
+        if (_overheating > 0)
+            _overheating -= Time.deltaTime;
+        if (_overheating > 5f)
+            attackCooldown = 5f;
+        if (_overheating < 1f)
+            attackCooldown = 0.3f;
 
         if (_walkTime <= 0)
         {
@@ -211,10 +219,12 @@ public class Player : MonoBehaviour
         {
             Quaternion rotation = _transform.rotation;
             Instantiate<GameObject>(laser, new Vector3(_transform.position.x + 0.8f, _transform.position.y , 0), rotation);
+            _overheating += 0.75f;
             _attackTime = attackCooldown;
 
             // Play the sound FX of shoot laser PEW PEW!!!
         }
+
     }
 
     private void UpMove()
