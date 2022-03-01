@@ -249,7 +249,7 @@ public class Player : MonoBehaviour
 
     }
 
-    private void PlayerShield ()
+    public void PlayerShield ()
     {
         if (_shieldTime <=0 && !shield.activeSelf)
         {
@@ -262,7 +262,7 @@ public class Player : MonoBehaviour
         _shieldTime = _shieldCooldawn;
     }
 
-    private void PlayerRocket ()
+    public void PlayerRocket ()
     {
         if (_rocketTime<=0)
         {
@@ -272,7 +272,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void PlayerDodge()
+    public void PlayerDodge()
     {
         if (_dodgeTime<=0)
         {
