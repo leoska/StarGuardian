@@ -32,7 +32,11 @@ public class Player : MonoBehaviour
     [Header("Limits")]
     public Vector2 limit_y = new Vector2(-4.25f, 4.25f);
     public Vector2 limit_x = new Vector2(-7f, 7);
+    
+    [Header("Joystick")]
+    public VariableJoystick variableJoystick;
 
+    [Header("Dodge")]
     public float dodgeCooldown = 7f;
     public float maxDodgeDuration = 5f;
 
@@ -88,6 +92,7 @@ public class Player : MonoBehaviour
         {
             _dodgeTimer -= Time.deltaTime;
 
+            // Механика уворота
             if (_scaleStatus == DodgeScaleStatus.Increase)
             {
                 transform.localScale = new Vector3(transform.localScale.x + scaleAnimationSpeed * Time.deltaTime, transform.localScale.y + scaleAnimationSpeed * Time.deltaTime, 0f);
@@ -96,7 +101,7 @@ public class Player : MonoBehaviour
             {
                 transform.localScale = new Vector3(transform.localScale.x - scaleAnimationSpeed * Time.deltaTime, transform.localScale.y - scaleAnimationSpeed * Time.deltaTime, 0f);
             }
-
+            
             if (transform.localScale.x <= _scaleDodgeLimits.x)
                 _scaleStatus = DodgeScaleStatus.Increase;
             if (transform.localScale.x >= _scaleDodgeLimits.y)
@@ -108,7 +113,8 @@ public class Player : MonoBehaviour
                 _dodgeTimer = 0f;
             }
         }
-
+        
+        JoystickUpdate();
         UpdateKeyboard();
     }
     
@@ -159,6 +165,12 @@ public class Player : MonoBehaviour
         {
             PlayerDodge();
         }
+    }
+
+    private void JoystickUpdate()
+    {
+        var directional = new Vector3(variableJoystick.Horizontal, variableJoystick.Vertical, 0f);
+        PlayerMove(directional);
     }
     
     // TODO: Отрефакторить. Не имеет смысла вообще использовать velocity -> лучше Vector3.Translate от transform.position
