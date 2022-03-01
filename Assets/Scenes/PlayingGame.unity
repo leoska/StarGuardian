@@ -1097,11 +1097,11 @@ MonoBehaviour:
   - {fileID: 4377281877947980533, guid: 8d48307b9d83b1c48a94182aa1bd0603, type: 3}
   - {fileID: 6660778156519410126, guid: 6c33981325b36e14b9bdbd038e3f0748, type: 3}
   countLayers: 15
-  scaleLimits: {x: 0.1, y: 0.5}
+  scaleLimits: {x: 0.1, y: 0.15}
   speedLimits: {x: 0.4, y: 4}
   Y_limits: {x: -4.25, y: 4.25}
-  timerLimits: {x: 3, y: 5}
-  usedPlanetSize: 5
+  timerLimits: {x: 7, y: 10}
+  usedPlanetSize: 2
 --- !u!4 &734735479
 Transform:
   m_ObjectHideFlags: 0
