@@ -20,6 +20,7 @@ public class FireTouch : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Player.PlayerAttack();
+        if (App.Instance.gameController.state == GameController.GameState.Game)
+            Player.PlayerAttack();
     }
 }
