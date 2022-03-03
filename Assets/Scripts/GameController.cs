@@ -17,7 +17,8 @@ public class GameController : MonoBehaviour
     [Header("Player")] 
     public GameObject player;
 
-    [Header("HUD buttons")] 
+    [Header("HUD buttons")]
+    public GameObject attackButton;
     public GameObject rocketButton;
     public GameObject dodgeButton;
     public GameObject shieldButton;
@@ -74,8 +75,9 @@ public class GameController : MonoBehaviour
                 
                 // Убираем кнопку рестарта
                 restartButton.SetActive(false);
-                
+
                 // Other HUD Buttons
+                attackButton.SetActive(false);
                 rocketButton.SetActive(false);
                 dodgeButton.SetActive(false);
                 shieldButton.SetActive(false);
@@ -88,8 +90,9 @@ public class GameController : MonoBehaviour
                 
                 // Убираем кнопку рестарта
                 restartButton.SetActive(false);
-                
+
                 // Other HUD Buttons
+                attackButton.SetActive(true);
                 rocketButton.SetActive(true);
                 dodgeButton.SetActive(true);
                 shieldButton.SetActive(true);
@@ -99,8 +102,9 @@ public class GameController : MonoBehaviour
             case GameState.GameOver:
                 // Показываем кнопку рестарта
                 restartButton.SetActive(true);
-                
+
                 // Other HUD Buttons
+                attackButton.SetActive(false);
                 rocketButton.SetActive(false);
                 dodgeButton.SetActive(false);
                 shieldButton.SetActive(false);
