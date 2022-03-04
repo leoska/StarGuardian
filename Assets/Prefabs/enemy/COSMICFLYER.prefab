@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5779129266016509215}
   - component: {fileID: 5588309726667762816}
   - component: {fileID: 4406167781257311188}
+  - component: {fileID: 5444596655814312037}
   m_Layer: 0
   m_Name: COSMICFLYER
   m_TagString: Enemy
@@ -127,3 +128,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.45, y: 1.5}
   m_EdgeRadius: 0
+--- !u!50 &5444596655814312037
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479040464581100129}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

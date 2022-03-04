@@ -59,18 +59,18 @@ public class Enemy : MonoBehaviour
         Invoke("Shoot", timer);
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("FireZone"))
+        {
+            App.Instance.gameController.enemiesOnScreen.Add(gameObject.GetInstanceID(), gameObject);
+        }
+        
+        if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
             App.Instance.gameController.GameOver();
-        }
-        
-        if (collision.gameObject.tag == "FireZone")
-        {
-            App.Instance.gameController.enemiesOnScreen.Add(gameObject.GetInstanceID(), gameObject);
         }
     }
 

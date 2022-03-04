@@ -231,7 +231,7 @@ public class Player : MonoBehaviour
         if (_attackTime <= 0)
         {
             Quaternion rotation = _transform.rotation;
-            Instantiate<GameObject>(laser, new Vector3(_transform.position.x + 0.8f, _transform.position.y , 0), rotation);
+            Instantiate<GameObject>(laser, new Vector3(_transform.position.x, _transform.position.y + 0.8f , 0), rotation);
             // _overheating += 0.75f;
             _attackTime = attackCooldown;
 
