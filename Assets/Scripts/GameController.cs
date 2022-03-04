@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,17 +19,14 @@ public class GameController : MonoBehaviour
     public GameObject player;
 
     [Header("HUD buttons")]
-    public GameObject attackButton;
-    public GameObject rocketButton;
-    public GameObject dodgeButton;
-    public GameObject shieldButton;
     public GameObject restartButton;
     public GameObject joystick;
 
     private GameState _state = GameState.Menu;
 
     public GameState state => _state;
-    
+    public Dictionary<int, GameObject> enemiesOnScreen = new Dictionary<int, GameObject>();
+
     private float timer = 0f;
 
     // Start is called before the first frame update
@@ -77,10 +75,6 @@ public class GameController : MonoBehaviour
                 restartButton.SetActive(false);
 
                 // Other HUD Buttons
-                attackButton.SetActive(false);
-                rocketButton.SetActive(false);
-                dodgeButton.SetActive(false);
-                shieldButton.SetActive(false);
                 joystick.SetActive(false);
                 break;
             
@@ -92,10 +86,6 @@ public class GameController : MonoBehaviour
                 restartButton.SetActive(false);
 
                 // Other HUD Buttons
-                attackButton.SetActive(true);
-                rocketButton.SetActive(true);
-                dodgeButton.SetActive(true);
-                shieldButton.SetActive(true);
                 joystick.SetActive(true);
                 break;
             
@@ -104,10 +94,6 @@ public class GameController : MonoBehaviour
                 restartButton.SetActive(true);
 
                 // Other HUD Buttons
-                attackButton.SetActive(false);
-                rocketButton.SetActive(false);
-                dodgeButton.SetActive(false);
-                shieldButton.SetActive(false);
                 joystick.SetActive(false);
                 break;
         }

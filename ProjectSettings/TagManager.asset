@@ -9,6 +9,7 @@ TagManager:
   - EnemyLaser
   - PlayerLaser
   - SceneState
+  - FireZone
   layers:
   - Default
   - TransparentFX

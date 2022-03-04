@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -8,7 +10,7 @@ public class Enemy : MonoBehaviour
     public GameObject EnemyLaser;
     public float speed = 2f;
     public float bounx_x = -11f;
-    public Vector2 y_limits = new Vector2(-4.5f, 4.5f);
+    public Vector2 x_limits = new Vector2(-1.9f, 1.9f);
 
     private VerticalDirection _dir;
 
@@ -23,29 +25,36 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         Vector3 pos = transform.position;
-        pos.x -= speed * Time.deltaTime;
-        pos.y += _dir == VerticalDirection.Down ? -speed * Time.deltaTime : speed * Time.deltaTime;
-        if (pos.y < y_limits.x)
+        pos.y -= speed * Time.deltaTime;
+        pos.x += _dir == VerticalDirection.Left ? -speed * Time.deltaTime : speed * Time.deltaTime;
+        if (pos.x < x_limits.x)
         {
-            _dir = VerticalDirection.Up;
-            pos.y = y_limits.x;
+            _dir = VerticalDirection.Right;
+            pos.x = x_limits.x;
 
         }
-        else if (pos.y > y_limits.y)
+        else if (pos.x > x_limits.y)
         {
-            _dir = VerticalDirection.Down;
-            pos.y = y_limits.y;
+            _dir = VerticalDirection.Left;
+            pos.x = x_limits.y;
         }
         transform.position = pos;
-        if (pos.x < bounx_x)
+        if (pos.y < bounx_x)
             Destroy(gameObject);
 
     }
+
+    private void OnDestroy()
+    {
+        if (App.Instance.gameController.enemiesOnScreen.ContainsKey(gameObject.GetInstanceID()))
+            App.Instance.gameController.enemiesOnScreen.Remove(gameObject.GetInstanceID());
+    }
+
     void Shoot()
     {
         Quaternion rotation = transform.rotation;
-        rotation.eulerAngles = new Vector3(0f, 0f, 180f);
-        Instantiate<GameObject>(EnemyLaser, new Vector3(transform.position.x - 0.8f, transform.position.y, 0), rotation);
+        rotation.eulerAngles = new Vector3(0f, 0f, 270f);
+        Instantiate<GameObject>(EnemyLaser, new Vector3(transform.position.x, transform.position.y - 0.8f, 0f), rotation);
         float timer = Random.Range(timer_limits.x, timer_limits.y);
         Invoke("Shoot", timer);
     }
@@ -58,11 +67,16 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
             App.Instance.gameController.GameOver();
         }
+        
+        if (collision.gameObject.tag == "FireZone")
+        {
+            App.Instance.gameController.enemiesOnScreen.Add(gameObject.GetInstanceID(), gameObject);
+        }
     }
 
     public enum VerticalDirection
     {
-        Up = 0,
-        Down = 1,
+        Left = 0,
+        Right = 1,
     }
 }

@@ -116,6 +116,12 @@ public class Player : MonoBehaviour
         
         JoystickUpdate();
         UpdateKeyboard();
+        
+        // Механика стрельбы
+        if (App.Instance.gameController.enemiesOnScreen.Count > 0)
+        {
+            PlayerAttack();
+        }
     }
     
     // TODO: требует рефакторинга!!!
@@ -144,11 +150,6 @@ public class Player : MonoBehaviour
             var directional = new Vector3(xPosition, yPosition, 0);
 
             PlayerMove(directional);
-        }
-
-        if (fire)
-        {
-            PlayerAttack();
         }
 
         if (shield)
@@ -231,7 +232,7 @@ public class Player : MonoBehaviour
         {
             Quaternion rotation = _transform.rotation;
             Instantiate<GameObject>(laser, new Vector3(_transform.position.x + 0.8f, _transform.position.y , 0), rotation);
-            _overheating += 0.75f;
+            // _overheating += 0.75f;
             _attackTime = attackCooldown;
 
             // Play the sound FX of shoot laser PEW PEW!!!
