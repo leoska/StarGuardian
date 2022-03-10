@@ -20,7 +20,8 @@ public class GameController : MonoBehaviour
 
     [Header("HUD buttons")]
     public GameObject restartButton;
-    public GameObject joystick;
+    // public GameObject joystick;
+    public InputMoveTouch inputMoveTouch;
 
     private GameState _state = GameState.Menu;
 
@@ -73,9 +74,6 @@ public class GameController : MonoBehaviour
                 
                 // Убираем кнопку рестарта
                 restartButton.SetActive(false);
-
-                // Other HUD Buttons
-                joystick.SetActive(false);
                 break;
             
             case GameState.Game:
@@ -84,17 +82,11 @@ public class GameController : MonoBehaviour
                 
                 // Убираем кнопку рестарта
                 restartButton.SetActive(false);
-
-                // Other HUD Buttons
-                joystick.SetActive(true);
                 break;
             
             case GameState.GameOver:
                 // Показываем кнопку рестарта
                 restartButton.SetActive(true);
-
-                // Other HUD Buttons
-                joystick.SetActive(false);
                 break;
         }
 

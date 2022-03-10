@@ -113,8 +113,9 @@ public class Player : MonoBehaviour
                 _dodgeTimer = 0f;
             }
         }
-        
-        JoystickUpdate();
+
+        TouchMoveUpdate();
+        //JoystickUpdate();
         UpdateKeyboard();
         
         // Механика стрельбы
@@ -168,10 +169,24 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void JoystickUpdate()
+    private void TouchMoveUpdate()
     {
-        var directional = new Vector3(variableJoystick.Horizontal, variableJoystick.Vertical, 0f);
-        PlayerMove(directional);
+        var inputMoveTouch = App.Instance.gameController.inputMoveTouch;
+        var touchPos = new Vector3(inputMoveTouch.position.x, inputMoveTouch.position.y, 0f);
+        Vector3 dir = (touchPos - transform.position).normalized;
+
+        if (inputMoveTouch.touch)
+        {
+            _rigidbody2D.velocity = dir * walkSpeed * Time.deltaTime;
+        
+            transform.Translate(dir * walkSpeed * Time.deltaTime);
+        }
+        else
+        {
+            _rigidbody2D.velocity = new Vector2(0f, 0f);
+        }
+        
+        Debug.DrawRay(transform.position, dir, Color.green);
     }
     
     // TODO: Отрефакторить. Не имеет смысла вообще использовать velocity -> лучше Vector3.Translate от transform.position
