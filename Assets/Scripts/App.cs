@@ -28,7 +28,6 @@ public class App
     public void Initialize(GameController controller)
     {
         _gameController = controller;
-        Debug.Log(_gameController);
     }
 
     public void EventUpdate()

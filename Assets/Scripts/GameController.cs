@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Controllers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +21,6 @@ public class GameController : MonoBehaviour
 
     [Header("HUD buttons")]
     public GameObject restartButton;
-    // public GameObject joystick;
     public InputMoveTouch inputMoveTouch;
 
     private GameState _state = GameState.Menu;
@@ -33,6 +33,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        DontDestroyOnLoad(this);
         App.Instance.Initialize(this);
         SwitchGameState(startGameState);
         timer = 0f;

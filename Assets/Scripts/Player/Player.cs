@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
     public float walkCooldown = 0.005f;
     [FormerlySerializedAs("AttackCooldown")] 
     public float attackCooldown = 0.5f;
-    private float _overheating;
     [FormerlySerializedAs("ScaleAnimationSpeed")] 
     public float scaleAnimationSpeed = 0.5f;
 
@@ -33,9 +32,6 @@ public class Player : MonoBehaviour
     [Header("Limits")]
     public Vector2 limit_y = new Vector2(-4.25f, 4.25f);
     public Vector2 limit_x = new Vector2(-7f, 7);
-    
-    [Header("Joystick")]
-    public VariableJoystick variableJoystick;
 
     [Header("Dodge")]
     public float dodgeCooldown = 7f;
@@ -50,6 +46,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private Transform _transform;
     private BoxCollider2D _boxCollider2d;
+    private Transform _transformPlayingGame;
+    
 
     // Start is called before the first frame update
     private void Start()
@@ -57,6 +55,7 @@ public class Player : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _transform = GetComponent<Transform>();
         _boxCollider2d = GetComponent<BoxCollider2D>();
+        _transformPlayingGame = App.Instance.gameController.playingGame.GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -67,13 +66,6 @@ public class Player : MonoBehaviour
 
         if (_attackTime > 0)
             _attackTime -= Time.deltaTime;
-
-        if (_overheating > 0)
-            _overheating -= Time.deltaTime;
-        if (_overheating > 5f)
-            attackCooldown = 5f;
-        if (_overheating < 1f)
-            attackCooldown = 0.3f;
 
         if (_walkTime <= 0)
         {
@@ -179,22 +171,18 @@ public class Player : MonoBehaviour
         
         // Переводим координаты экрана в мировые
         var inputPos = camera.ScreenToWorldPoint(inputMoveTouch.position);
-        var touchPos = new Vector3(inputPos.x, inputPos.y, 0f);
-        Vector3 dir = (touchPos - transform.position);
+        Vector3 dir = (inputPos - transform.position);
+        dir.z = 0;
 
         if (inputMoveTouch.touch)
         {
-            PlayerMove(dir * walkSpeed * Time.deltaTime);
-            //_rigidbody2D.velocity = dir * walkSpeed * Time.deltaTime;
-        
-            //transform.Translate(dir * walkSpeed * Time.deltaTime);
+            PlayerMove(dir);
+            Debug.DrawRay(transform.position, dir, Color.green);
         }
         else
         {
             _rigidbody2D.velocity = new Vector2(0f, 0f);
         }
-        
-        Debug.DrawRay(transform.position, dir, Color.green);
     }
     
     // TODO: Отрефакторить. Не имеет смысла вообще использовать velocity -> лучше Vector3.Translate от transform.position
@@ -202,7 +190,8 @@ public class Player : MonoBehaviour
     {
         if (directional.magnitude > 0)
         {
-            directional.Normalize();
+            // TODO: закомментировал, т.к. нормализация не требуется
+            //directional.Normalize();
             _walkTime = walkCooldown;
 
             if (directional.magnitude != 0)
@@ -254,8 +243,7 @@ public class Player : MonoBehaviour
         if (_attackTime <= 0)
         {
             Quaternion rotation = _transform.rotation;
-            Instantiate<GameObject>(laser, new Vector3(_transform.position.x, _transform.position.y + 0.8f , 0), rotation);
-            // _overheating += 0.75f;
+            Instantiate<GameObject>(laser, new Vector3(_transform.position.x, _transform.position.y + 0.8f , 0), rotation, _transformPlayingGame);
             _attackTime = attackCooldown;
 
             // Play the sound FX of shoot laser PEW PEW!!!
@@ -263,17 +251,7 @@ public class Player : MonoBehaviour
 
     }
 
-    private void UpMove()
-    {
-
-    }
-
-    private void DownMove()
-    {
-
-    }
-
-    public void PlayerShield ()
+    public void PlayerShield()
     {
         if (_shieldTime <=0 && !shield.activeSelf)
         {
@@ -281,12 +259,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ShieldCooldawn ()
+    public void ShieldCooldawn()
     {
         _shieldTime = _shieldCooldawn;
     }
 
-    public void PlayerRocket ()
+    public void PlayerRocket()
     {
         if (_rocketTime<=0)
         {
