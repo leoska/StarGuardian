@@ -487,7 +487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6299c331710070648a656cb56e36294e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 4
+  walkSpeed: 10
   walkCooldown: 0.005
   attackCooldown: 0.15
   scaleAnimationSpeed: 0.7
@@ -500,6 +500,7 @@ MonoBehaviour:
   variableJoystick: {fileID: 198424184}
   dodgeCooldown: 7
   maxDodgeDuration: 5
+  camera: {fileID: 1198975376}
 --- !u!61 &193271485
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -948,7 +949,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf84073bb1ccb941928fe0506d81e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _touchPosition: {x: 0, y: 0}
 --- !u!114 &597525761
 MonoBehaviour:
   m_ObjectHideFlags: 0

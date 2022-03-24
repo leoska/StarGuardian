@@ -24,7 +24,8 @@ public class Player : MonoBehaviour
     public float rocketCooldown = 5f;
     private float _rocketTime = 0f;
 
-    [FormerlySerializedAs("Shield")] [Header("Shield")]
+    [FormerlySerializedAs("Shield")] 
+    [Header("Shield")]
     public GameObject shield;
     private float _shieldTime = 0f;
     private float _shieldCooldawn = 10f;
@@ -39,6 +40,9 @@ public class Player : MonoBehaviour
     [Header("Dodge")]
     public float dodgeCooldown = 7f;
     public float maxDodgeDuration = 5f;
+
+    [Header("Camera")] 
+    public Camera camera;
 
     private float _walkTime = 0f, _attackTime = 0f, _dodgeTime = 0f, _dodgeTimer = 0f;
     private Vector2 _scaleDodgeLimits = new Vector2(1f, 1.5f);
@@ -172,14 +176,18 @@ public class Player : MonoBehaviour
     private void TouchMoveUpdate()
     {
         var inputMoveTouch = App.Instance.gameController.inputMoveTouch;
-        var touchPos = new Vector3(inputMoveTouch.position.x, inputMoveTouch.position.y, 0f);
-        Vector3 dir = (touchPos - transform.position).normalized;
+        
+        // Переводим координаты экрана в мировые
+        var inputPos = camera.ScreenToWorldPoint(inputMoveTouch.position);
+        var touchPos = new Vector3(inputPos.x, inputPos.y, 0f);
+        Vector3 dir = (touchPos - transform.position);
 
         if (inputMoveTouch.touch)
         {
-            _rigidbody2D.velocity = dir * walkSpeed * Time.deltaTime;
+            PlayerMove(dir * walkSpeed * Time.deltaTime);
+            //_rigidbody2D.velocity = dir * walkSpeed * Time.deltaTime;
         
-            transform.Translate(dir * walkSpeed * Time.deltaTime);
+            //transform.Translate(dir * walkSpeed * Time.deltaTime);
         }
         else
         {
