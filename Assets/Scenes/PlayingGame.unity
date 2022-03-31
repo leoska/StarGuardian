@@ -487,7 +487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6299c331710070648a656cb56e36294e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 1.5
+  walkSpeed: 7
   walkCooldown: 0.005
   attackCooldown: 0.15
   scaleAnimationSpeed: 0.7
@@ -974,7 +974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &698976106
 Transform:
   m_ObjectHideFlags: 0
@@ -1155,7 +1155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4074e21858594d40805a760cc2f5092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGameState: 0
+  startGameState: 1
   score: 0
   mainMenu: {fileID: 698976105}
   playingGame: {fileID: 948836513}
@@ -1417,7 +1417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &948836514
 Transform:
   m_ObjectHideFlags: 0
