@@ -57,6 +57,11 @@ public class Background : MonoBehaviour
         }
     }
 
+    private void ScrollDown()
+    {
+        
+    }
+
     // Update is called once per frame
     void Update()
     {

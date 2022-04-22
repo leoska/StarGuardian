@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Controllers
+namespace Assets.Scripts.Controllers
 {
     public class InputMoveTouch : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
     {

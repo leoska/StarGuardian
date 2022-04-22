@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Controllers;
+using Assets.Scripts.Controllers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     [Header("GameState")] 
     public GameState startGameState = GameState.Menu;
+    public bool developmentMode = false;
 
     [Header("Game Score")]
     public uint score = 0;
@@ -22,6 +23,10 @@ public class GameController : MonoBehaviour
     [Header("HUD buttons")]
     public GameObject restartButton;
     public InputMoveTouch inputMoveTouch;
+
+    [Header("Cameras")] 
+    public GameObject mainCamera;
+    public GameObject guiCamera;
 
     private GameState _state = GameState.Menu;
 
@@ -42,8 +47,6 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        App.Instance.EventUpdate();
-
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             // TODO: Карен попросил возвращаться в главное меню
@@ -59,7 +62,7 @@ public class GameController : MonoBehaviour
             if (timer > 1)
             {
                 score += 1;
-                updateHUD();
+                UpdateHud();
                 timer = 0;
             }
         }
@@ -70,8 +73,12 @@ public class GameController : MonoBehaviour
         switch (newState)
         {
             case GameState.Menu:
+                // Переключаем контроллеры комнаты
                 mainMenu.SetActive(true);
                 playingGame.SetActive(false);
+                
+                // Выключаем главную камеру
+                // mainCamera.SetActive(false);
                 
                 // Убираем кнопку рестарта
                 restartButton.SetActive(false);
@@ -80,6 +87,9 @@ public class GameController : MonoBehaviour
             case GameState.Game:
                 mainMenu.SetActive(false);
                 playingGame.SetActive(true);
+                
+                // Включаем главную камеру
+                // mainCamera.SetActive(true);
                 
                 // Убираем кнопку рестарта
                 restartButton.SetActive(false);
@@ -116,10 +126,10 @@ public class GameController : MonoBehaviour
     public void AddScore(uint incScore)
     {
         score += incScore;
-        updateHUD();
+        UpdateHud();
     }
     
-    public void updateHUD()
+    public void UpdateHud()
     {
         var canvas = GameObject.Find("Canvas");
         if (canvas != null)

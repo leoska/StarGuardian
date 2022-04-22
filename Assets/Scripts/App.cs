@@ -29,8 +29,4 @@ public class App
     {
         _gameController = controller;
     }
-
-    public void EventUpdate()
-    {
-    }
 }

@@ -1155,13 +1155,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4074e21858594d40805a760cc2f5092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGameState: 1
+  startGameState: 0
+  developmentMode: 0
   score: 0
   mainMenu: {fileID: 698976105}
   playingGame: {fileID: 948836513}
   player: {fileID: 193271480}
   restartButton: {fileID: 1099484299}
   inputMoveTouch: {fileID: 597525760}
+  mainCamera: {fileID: 1198975374}
+  guiCamera: {fileID: 519420028}
 --- !u!1 &899033328
 GameObject:
   m_ObjectHideFlags: 0
@@ -2286,7 +2289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range_limits: {x: -1.9, y: 1.9}
-  timer: 4
+  timer: 1
   enemyPrefabs:
   - {fileID: 5528616765612585404, guid: bf617d66b2008724c9a06e6a9110698d, type: 3}
   - {fileID: 1479040464581100129, guid: 0d53758aa401d2444b3ff0908081d60b, type: 3}
