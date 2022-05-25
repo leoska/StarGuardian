@@ -89,7 +89,7 @@ public class Background : MonoBehaviour
             ScrollRight();
         }*/
         
-        if (_cameraTransform.position.y > (_layers[rightIndex].transform.position.y + viewZone))
+        if (_cameraTransform.position.y > (_layers[_topIndex].transform.position.y + viewZone))
         {
             ScrollDown();
         }

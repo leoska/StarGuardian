@@ -29,7 +29,7 @@ namespace Assets.Scripts.Controllers
         }
         void SpawnEnemy()
         {
-            float pos_x = Random.Range(range_limits.x,range_limits.y);
+            float pos_x = Random.Range(range_limits.x, range_limits.y);
             Vector3 pos = transform.position;
             pos.x = pos_x;
             int EnemyIndex = Random.Range(0, enemyPrefabs.Length);
@@ -39,9 +39,9 @@ namespace Assets.Scripts.Controllers
 
         void SpawnTrash ()
         {
-            float pos_y = Random.Range(range_limits.x, range_limits.y);
+            float pos_x = Random.Range(range_limits.x, range_limits.y);
             Vector3 pos = transform.position;
-            pos.y = pos_y;
+            pos.x = pos_x;
             int TrashIndex = Random.Range(0, trashPrefabs.Length);
             Instantiate<GameObject>(trashPrefabs[TrashIndex], pos, Quaternion.Euler(0f, 0f, 0f));
             Invoke("SpawnTrash", timer*3);
