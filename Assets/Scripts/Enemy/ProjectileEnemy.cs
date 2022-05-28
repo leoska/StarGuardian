@@ -21,9 +21,8 @@ public class ProjectileEnemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Destroy(collision.gameObject);
+            collision.GetComponent<Player>().TakeDamage(0.15f);
             Destroy(gameObject);
-            App.Instance.gameController.GameOver();
         }
         if (collision.gameObject.tag == "Finish")
             Destroy(gameObject);

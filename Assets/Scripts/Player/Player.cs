@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     [Header("Limits")]
     public Vector2 limit_y = new Vector2(-4.25f, 4.25f);
     public Vector2 limit_x = new Vector2(-7f, 7);
+    public float maxHealth = 1f;
 
     [Header("Dodge")]
     public float dodgeCooldown = 7f;
@@ -40,7 +41,11 @@ public class Player : MonoBehaviour
     [Header("Camera")] 
     public Camera camera;
 
+    [Header("HP Bar")] 
+    public HealthBar hpBar;
+
     private float _walkTime = 0f, _attackTime = 0f, _dodgeTime = 0f, _dodgeTimer = 0f;
+    public float _health = 0f;
     private Vector2 _scaleDodgeLimits = new Vector2(1f, 1.5f);
     private DodgeScaleStatus _scaleStatus;
     private Rigidbody2D _rigidbody2D;
@@ -56,6 +61,9 @@ public class Player : MonoBehaviour
         _transform = GetComponent<Transform>();
         _boxCollider2d = GetComponent<BoxCollider2D>();
         _transformPlayingGame = App.Instance.gameController.playingGame.GetComponent<Transform>();
+
+        _health = maxHealth;
+        hpBar.SetHealth(_health);
     }
 
     // Update is called once per frame
@@ -289,6 +297,14 @@ public class Player : MonoBehaviour
     {
         _boxCollider2d.enabled = true;
         transform.localScale = new Vector3(1f, 1f, 1f);
+    }
+
+    public void TakeDamage(float dmg)
+    {
+        _health -= dmg;
+        hpBar.SetHealth(_health);
+        
+        //App.Instance.gameController.GameOver();
     }
 
     enum DodgeScaleStatus
