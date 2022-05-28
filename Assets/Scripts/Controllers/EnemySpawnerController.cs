@@ -7,6 +7,7 @@ namespace Assets.Scripts.Controllers
         [Header("Limits")]
         public Vector2 range_limits = new Vector2(-1.9f, 1.9f);
         public float timer = 2f;
+        public float timerTrash = 30f;
 
         [Header("Enemy prefabs")]
         public GameObject[] enemyPrefabs;
@@ -18,7 +19,7 @@ namespace Assets.Scripts.Controllers
         void Start()
         {
             Invoke("SpawnEnemy", timer);
-            Invoke("SpawnTrash", timer*3);
+            Invoke("SpawnTrash", timerTrash);
         }
 
         // Update is called once per frame
@@ -44,7 +45,7 @@ namespace Assets.Scripts.Controllers
             pos.x = pos_x;
             int TrashIndex = Random.Range(0, trashPrefabs.Length);
             Instantiate<GameObject>(trashPrefabs[TrashIndex], pos, Quaternion.Euler(0f, 0f, 0f));
-            Invoke("SpawnTrash", timer*3);
+            Invoke("SpawnTrash", timerTrash);
         }
     }
 }

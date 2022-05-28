@@ -99,7 +99,7 @@ MonoBehaviour:
   timer_limits: {x: 0.8, y: 2.5}
   EnemyLaser: {fileID: 2521594375222409264, guid: 0c82cea2df61cf648ae16f44292bb90b,
     type: 3}
-  speed: 1.5
+  speed: 2
   bounx_x: -11
   x_limits: {x: -1.9, y: 1.9}
 --- !u!61 &-4139522057514944825
